@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Futuristic Portfolio | Graphic & Video Design</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --neon-blue: #00f7ff;
+            --deep-blue: #0a192f;
+            --dark-bg: #020c1b;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-bg);
+            color: white;
+            scroll-behavior: smooth;
+        }
+        
+        .neon-text {
+            text-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue);
+        }
+        
+        .neon-border {
+            box-shadow: 0 0 10px var(--neon-blue), 0 0 20px rgba(0, 247, 255, 0.3);
+        }
+        
+        .neon-hover:hover {
+            box-shadow: 0 0 15px var(--neon-blue), 0 0 30px rgba(0, 247, 255, 0.5);
+            transform: translateY(-3px);
+        }
+        
+        .glass-effect {
+            background: rgba(10, 25, 47, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 247, 255, 0.2);
+        }
+        
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .shine-effect {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .shine-effect::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 20%;
+            height: 200%;
+            opacity: 0;
+            transform: rotate(30deg);
+            background: rgba(255, 255, 255, 0.13);
+            background: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.3) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transition: all 0.5s ease;
+        }
+        
+        .shine-effect:hover::after {
+            opacity: 1;
+            left: 120%;
+            transition: all 0.5s ease;
+        }
+        
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .tooltip {
+            position: relative;
+        }
+        
+        .tooltip .tooltip-text {
+            visibility: hidden;
+            width: 120px;
+            background-color: var(--deep-blue);
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -60px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            border: 1px solid var(--neon-blue);
+        }
+        
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        /* 3D Card Effect */
+        .card-3d {
+            transform-style: preserve-3d;
+            transition: all 0.5s ease;
+        }
+        
+        .card-3d:hover {
+            transform: rotateY(10deg) rotateX(5deg) translateY(-10px);
+        }
+        
+        /* Glowing border animation */
+        @keyframes border-glow {
+            0% { box-shadow: 0 0 5px var(--neon-blue); }
+            50% { box-shadow: 0 0 20px var(--neon-blue); }
+            100% { box-shadow: 0 0 5px var(--neon-blue); }
+        }
+        
+        .glowing-border {
+            animation: border-glow 3s infinite;
+        }
+        
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--dark-bg);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--neon-blue);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-effect">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <span class="text-xl font-bold neon-text">3D<span class="text-white">PORTFOLIO</span></span>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#home" class="px-3 py-2 rounded-md text-sm font-medium hover:text-neon-blue transition duration-300">Home</a>
+                        <a href="#about" class="px-3 py-2 rounded-md text-sm font-medium hover:text-neon-blue transition duration-300">About</a>
+                        <a href="#portfolio" class="px-3 py-2 rounded-md text-sm font-medium hover:text-neon-blue transition duration-300">Portfolio</a>
+                        <a href="#services" class="px-3 py-2 rounded-md text-sm font-medium hover:text-neon-blue transition duration-300">Services</a>
+                        <a href="#testimonials" class="px-3 py-2 rounded-md text-sm font-medium hover:text-neon-blue transition duration-300">Testimonials</a>
+                        <a href="#contact" class="px-3 py-2 rounded-md text-sm font-medium hover:text-neon-blue transition duration-300">Contact</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button class="mobile-menu-button p-2 rounded-md text-neon-blue hover:text-white focus:outline-none">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden parallax" style="background-image: linear-gradient(rgba(2, 12, 27, 0.9), rgba(10, 25, 47, 0.8)), url('https://images.unsplash.com/photo-1639762681057-408e52192e55?q=80&w=2232&auto=format&fit=crop')">
+        <div class="absolute inset-0 flex items-center justify-center">
+            <div class="absolute w-64 h-64 rounded-full bg-neon-blue opacity-10 filter blur-3xl"></div>
+            <div class="absolute w-96 h-96 rounded-full bg-neon-blue opacity-5 filter blur-3xl -right-20 -bottom-20"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 neon-text">VISUAL STORYTELLER</h1>
+            <p class="text-xl md:text-2xl mb-8">Graphic Designer • Video Editor • Motion Artist</p>
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-4 mt-12">
+                <a href="#portfolio" class="px-8 py-3 bg-transparent border-2 border-neon-blue text-neon-blue rounded-full font-semibold hover:bg-neon-blue hover:text-black transition duration-300 neon-hover shine-effect">
+                    View Work
+                </a>
+                <a href="#contact" class="px-8 py-3 bg-neon-blue text-black rounded-full font-semibold hover:bg-transparent hover:text-neon-blue hover:border-neon-blue border-2 border-transparent transition duration-300 neon-hover shine-effect">
+                    Hire Me
+                </a>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2">
+            <a href="#about" class="text-neon-blue animate-bounce">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gradient-to-b from-dark-bg to-deep-blue">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center mb-16 neon-text">ABOUT ME</h2>
+            
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="relative w-full lg:w-1/3 flex justify-center">
+                    <div class="w-64 h-64 rounded-full overflow-hidden border-4 border-neon-blue neon-border floating">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5cd?q=80&w=2588&auto=format&fit=crop" alt="Profile" class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute -inset-4 rounded-full border-2 border-neon-blue opacity-70 animate-spin-slow"></div>
+                </div>
+                
+                <div class="w-full lg:w-2/3">
+                    <h3 class="text-2xl font-semibold mb-4">Creative Professional with 8+ Years Experience</h3>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        I'm a passionate visual designer specializing in motion graphics, video editing, and brand identity. 
+                        With a background in both digital arts and marketing, I create compelling visual narratives that 
+                        captivate audiences and drive engagement. My work blends technical precision with artistic vision 
+                        to deliver stunning results across various media platforms.
+                    </p>
+                    
+                    <div class="mb-8">
+                        <h4 class="text-xl font-medium mb-4 neon-text">My Toolkit</h4>
+                        <div class="flex flex-wrap gap-4">
+                            <div class="tooltip">
+                                <div class="w-16 h-16 rounded-lg glass-effect flex items-center justify-center neon-hover">
+                                    <i class="fab fa-adobe text-3xl text-neon-blue"></i>
+                                </div>
+                                <span class="tooltip-text">Adobe Creative Suite</span>
+                            </div>
+                            <div class="tooltip">
+                                <div class="w-16 h-16 rounded-lg glass-effect flex items-center justify-center neon-hover">
+                                    <i class="fas fa-film text-3xl text-neon-blue"></i>
+                                </div>
+                                <span class="tooltip-text">DaVinci Resolve</span>
+                            </div>
+                            <div class="tooltip">
+                                <div class="w-16 h-16 rounded-lg glass-effect flex items-center justify-center neon-hover">
+                                    <i class="fas fa-cube text-3xl text-neon-blue"></i>
+                                </div>
+                                <span class="tooltip-text">Blender 3D</span>
+                            </div>
+                            <div class="tooltip">
+                                <div class="w-16 h-16 rounded-lg glass-effect flex items-center justify-center neon-hover">
+                                    <i class="fab fa-figma text-3xl text-neon-blue"></i>
+                                </div>
+                                <span class="tooltip-text">Figma</span>
+                            </div>
+                            <div class="tooltip">
+                                <div class="w-16 h-16 rounded-lg glass-effect flex items-center justify-center neon-hover">
+                                    <i class="fas fa-code text-3xl text-neon-blue"></i>
+                                </div>
+                                <span class="tooltip-text">HTML/CSS/JS</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="#" class="inline-flex items-center text-neon-blue hover:text-white transition duration-300">
+                        Download Resume
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-20 bg-deep-blue">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center mb-4 neon-text">MY PORTFOLIO</h2>
+            <p class="text-center text-gray-300 mb-12">Selected works from recent projects</p>
+            
+            <div class="flex justify-center mb-12">
+                <div class="inline-flex rounded-md shadow-sm glass-effect p-1" role="group">
+                    <button type="button" class="px-4 py-2 text-sm font-medium rounded-l-lg hover:bg-neon-blue hover:text-black transition duration-300 filter-btn active" data-filter="all">
+                        All
+                    </button>
+                    <button type="button" class="px-4 py-2 text-sm font-medium hover:bg-neon-blue hover:text-black transition duration-300 filter-btn" data-filter="branding">
+                        Branding
+                    </button>
+                    <button type="button" class="px-4 py-2 text-sm font-medium hover:bg-neon-blue hover:text-black transition duration-300 filter-btn" data-filter="motion">
+                        Motion
+                    </button>
+                    <button type="button" class="px-4 py-2 text-sm font-medium hover:bg-neon-blue hover:text-black transition duration-300 filter-btn" data-filter="editing">
+                        Editing
+                    </button>
+                    <button type="button" class="px-4 py-2 text-sm font-medium rounded-r-lg hover:bg-neon-blue hover:text-black transition duration-300 filter-btn" data-filter="ui">
+                        UI/UX
+                    </button>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Portfolio Item 1 -->
+                <div class="portfolio-item card-3d shine-effect" data-category="branding">
+                    <div class="relative overflow-hidden rounded-xl h-80 glass-effect neon-hover">
+                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop" alt="Project 1" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-80"></div>
+                        <div class="absolute bottom-0 left-0 p-6 w-full">
+                            <h3 class="text-xl font-bold mb-2">Nebula Brand Identity</h3>
+                            <p class="text-gray-300 text-sm">Logo Design • Brand Guidelines</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 2 -->
+                <div class="portfolio-item card-3d shine-effect" data-category="motion">
+                    <div class="relative overflow-hidden rounded-xl h-80 glass-effect neon-hover">
+                        <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=2574&auto=format&fit=crop" alt="Project 2" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-80"></div>
+                        <div class="absolute bottom-0 left-0 p-6 w-full">
+                            <h3 class="text-xl font-bold mb-2">Cyberpunk Motion Reel</h3>
+                            <p class="text-gray-300 text-sm">After Effects • Cinema 4D</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 3 -->
+                <div class="portfolio-item card-3d shine-effect" data-category="editing">
+                    <div class="relative overflow-hidden rounded-xl h-80 glass-effect neon-hover">
+                        <img src="https://images.unsplash.com/photo-1611162616475-465b1877466d?q=80&w=2574&auto=format&fit=crop" alt="Project 3" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-80"></div>
+                        <div class="absolute bottom-0 left-0 p-6 w-full">
+                            <h3 class="text-xl font-bold mb-2">Tech Conference Recap</h3>
+                            <p class="text-gray-300 text-sm">Video Editing • Color Grading</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 4 -->
+                <div class="portfolio-item card-3d shine-effect" data-category="ui">
+                    <div class="relative overflow-hidden rounded-xl h-80 glass-effect neon-hover">
+                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=2574&auto=format&fit=crop" alt="Project 4" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-80"></div>
+                        <div class="absolute bottom-0 left-0 p-6 w-full">
+                            <h3 class="text-xl font-bold mb-2">Futuristic App UI</h3>
+                            <p class="text-gray-300 text-sm">Figma • Prototyping</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 5 -->
+                <div class="portfolio-item card-3d shine-effect" data-category="branding">
+                    <div class="relative overflow-hidden rounded-xl h-80 glass-effect neon-hover">
+                        <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=2670&auto=format&fit=crop" alt="Project 5" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-80"></div>
+                        <div class="absolute bottom-0 left-0 p-6 w-full">
+                            <h3 class="text-xl font-bold mb-2">Aurora Packaging Design</h3>
+                            <p class="text-gray-300 text-sm">3D Rendering • Product Design</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 6 -->
+                <div class="portfolio-item card-3d shine-effect" data-category="motion">
+                    <div class="relative overflow-hidden rounded-xl h-80 glass-effect neon-hover">
+                        <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=2671&auto=format&fit=crop" alt="Project 6" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-80"></div>
+                        <div class="absolute bottom-0 left-0 p-6 w-full">
+                            <h3 class="text-xl font-bold mb-2">Sci-Fi Title Sequence</h3>
+                            <p class="text-gray-300 text-sm">Motion Design • Typography</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="inline-flex items-center px-6 py-3 border border-neon-blue text-neon-blue rounded-full hover:bg-neon-blue hover:text-black transition duration-300 neon-hover">
+                    View All Projects
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-gradient-to-b from-deep-blue to-dark-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center mb-4 neon-text">SERVICES</h2>
+            <p class="text-center text-gray-300 mb-12">What I can do for you</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Service 1 -->
+                <div class="card-3d glass-effect p-8 rounded-xl neon-hover">
+                    <div class="w-16 h-16 bg-neon-blue bg-opacity-10 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-film text-3xl text-neon-blue"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-center">Video Editing</h3>
+                    <p class="text-gray-300 text-center">
+                        Professional editing for commercials, social media, documentaries, and corporate videos with color grading and sound design.
+                    </p>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="card-3d glass-effect p-8 rounded-xl neon-hover">
+                    <div class="w-16 h-16 bg-neon-blue bg-opacity-10 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-cubes text-3xl text-neon-blue"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-center">Motion Graphics</h3>
+                    <p class="text-gray-300 text-center">
+                        Dynamic animations, explainer videos, and title sequences that bring your message to life with movement.
+                    </p>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="card-3d glass-effect p-8 rounded-xl neon-hover">
+                    <div class="w-16 h-16 bg-neon-blue bg-opacity-10 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-palette text-3xl text-neon-blue"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-center">Brand Identity</h3>
+                    <p class="text-gray-300 text-center">
+                        Comprehensive branding solutions including logo design, style guides, and visual identity systems.
+                    </p>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="card-3d glass-effect p-8 rounded-xl neon-hover">
+                    <div class="w-16 h-16 bg-neon-blue bg-opacity-10 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-mobile-alt text-3xl text-neon-blue"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-center">UI/UX Design</h3>
+                    <p class="text-gray-300 text-center">
+                        User-centered digital experiences with intuitive interfaces, wireframes, and interactive prototypes.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 bg-dark-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center mb-16 neon-text">TESTIMONIALS</h2>
+            
+            <div class="relative">
+                <div class="glowing-border glass-effect p-8 rounded-xl max-w-4xl mx-auto">
+                    <div class="testimonial-slider">
+                        <!-- Testimonial 1 -->
+                        <div class="testimonial-item text-center">
+                            <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-neon-blue mx-auto mb-6">
+                                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=2587&auto=format&fit=crop" alt="Client" class="w-full h-full object-cover">
+                            </div>
+                            <p class="text-lg italic mb-6">
+                                "Working with this designer was an absolute pleasure. They took our vague concept and transformed it into a stunning visual identity that perfectly captured our brand's essence. The attention to detail and creative vision exceeded all our expectations."
+                            </p>
+                            <h4 class="font-bold text-neon-blue">Sarah Johnson</h4>
+                            <p class="text-sm text-gray-400">Marketing Director, TechNova</p>
+                        </div>
+                        
+                        <!-- Testimonial 2 -->
+                        <div class="testimonial-item text-center hidden">
+                            <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-neon-blue mx-auto mb-6">
+                                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=2587&auto=format&fit=crop" alt="Client" class="w-full h-full object-cover">
+                            </div>
+                            <p class="text-lg italic mb-6">
+                                "The motion graphics created for our product launch were phenomenal. They managed to communicate complex features in an engaging, visually stunning way that significantly boosted our campaign performance. Highly recommended!"
+                            </p>
+                            <h4 class="font-bold text-neon-blue">Michael Chen</h4>
+                            <p class="text-sm text-gray-400">CEO, Quantum Innovations</p>
+                        </div>
+                        
+                        <!-- Testimonial 3 -->
+                        <div class="testimonial-item text-center hidden">
+                            <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-neon-blue mx-auto mb-6">
+                                <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=2587&auto=format&fit=crop" alt="Client" class="w-full h-full object-cover">
+                            </div>
+                            <p class="text-lg italic mb-6">
+                                "As a creative director, I'm extremely particular about who I collaborate with. This designer's ability to understand and elevate our creative vision while maintaining technical perfection is rare. They've become our go-to for all high-profile projects."
+                            </p>
+                            <h4 class="font-bold text-neon-blue">Emma Rodriguez</h4>
+                            <p class="text-sm text-gray-400">Creative Director, Luxe Media</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="testimonial-prev absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4 bg-deep-blue rounded-full w-10 h-10 flex items-center justify-center text-neon-blue hover:bg-neon-blue hover:text-black transition duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+                
+                <button class="testimonial-next absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 bg-deep-blue rounded-full w-10 h-10 flex items-center justify-center text-neon-blue hover:bg-neon-blue hover:text-black transition duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="flex justify-center mt-8 space-x-2">
+                <button class="testimonial-dot w-3 h-3 rounded-full bg-neon-blue bg-opacity-30 focus:outline-none active"></button>
+                <button class="testimonial-dot w-3 h-3 rounded-full bg-neon-blue bg-opacity-30 focus:outline-none"></button>
+                <button class="testimonial-dot w-3 h-3 rounded-full bg-neon-blue bg-opacity-30 focus:outline-none"></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gradient-to-t from-dark-bg to-deep-blue">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center mb-4 neon-text">GET IN TOUCH</h2>
+            <p class="text-center text-gray-300 mb-12">Let's create something amazing together</p>
+            
+            <div class="flex flex-col lg:flex-row gap-12">
+                <div class="w-full lg:w-1/2 glass-effect p-8 rounded-xl neon-hover">
+                    <h3 class="text-2xl font-bold mb-6">Send Me a Message</h3>
+                    
+                    <form class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-300 mb-1">Your Name</label>
+                            <input type="text" id="name" class="w-full px-4 py-3 bg-deep-blue border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-neon-blue focus:border-transparent" placeholder="John Doe">
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email Address</label>
+                            <input type="email" id="email" class="w-full px-4 py-3 bg-deep-blue border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-neon-blue focus:border-transparent" placeholder="john@example.com">
+                        </div>
+                        
+                        <div>
+                            <label for="subject" class="block text-sm font-medium text-gray-300 mb-1">Subject</label>
+                            <input type="text" id="subject" class="w-full px-4 py-3 bg-deep-blue border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-neon-blue focus:border-transparent" placeholder="Project Inquiry">
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-300 mb-1">Your Message</label>
+                            <textarea id="message" rows="5" class="w-full px-4 py-3 bg-deep-blue border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-neon-blue focus:border-transparent" placeholder="Tell me about your project..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full px-6 py-3 bg-neon-blue text-black font-semibold rounded-lg hover:bg-transparent hover:text-neon-blue hover:border-neon-blue border-2 border-transparent transition duration-300 neon-hover">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="w-full lg:w-1/2">
+                    <div class="glass-effect p-8 rounded-xl mb-8 neon-hover">
+                        <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 pt-1">
+                                    <i class="fas fa-envelope text-neon-blue text-xl"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-medium">Email</h4>
+                                    <a href="mailto:contact@designerportfolio.com" class="text-gray-300 hover:text-neon-blue transition duration-300">contact@designerportfolio.com</a>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 pt-1">
+                                    <i class="fas fa-phone-alt text-neon-blue text-xl"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-medium">Phone</h4>
+                                    <a href="tel:+1234567890" class="text-gray-300 hover:text-neon-blue transition duration-300">+1 (234) 567-890</a>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 pt-1">
+                                    <i class="fas fa-map-marker-alt text-neon-blue text-xl"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-medium">Location</h4>
+                                    <p class="text-gray-300">San Francisco, CA</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="glass-effect p-8 rounded-xl neon-hover">
+                        <h3 class="text-2xl font-bold mb-6">Follow Me</h3>
+                        
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-12 h-12 rounded-full bg-deep-blue flex items-center justify-center text-neon-blue hover:bg-neon-blue hover:text-black transition duration-300 neon-hover">
+                                <i class="fab fa-behance text-xl"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 rounded-full bg-deep-blue flex items-center justify-center text-neon-blue hover:bg-neon-blue hover:text-black transition duration-300 neon-hover">
+                                <i class="fab fa-dribbble text-xl"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 rounded-full bg-deep-blue flex items-center justify-center text-neon-blue hover:bg-neon-blue hover:text-black transition duration-300 neon-hover">
+                                <i class="fab fa-instagram text-xl"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 rounded-full bg-deep-blue flex items-center justify-center text-neon-blue hover:bg-neon-blue hover:text-black transition duration-300 neon-hover">
+                                <i class="fab fa-linkedin-in text-xl"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 rounded-full bg-deep-blue flex items-center justify-center text-neon-blue hover:bg-neon-blue hover:text-black transition duration-300 neon-hover">
+                                <i class="fab fa-youtube text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <span class="text-xl font-bold neon-text">3D<span class="text-white">PORTFOLIO</span></span>
+                    <p class="text-gray-400 mt-2">© 2023 Creative Designer. All rights reserved.</p>
+                </div>
+                
+                <div class="flex flex-wrap justify-center gap-6">
+                    <a href="#home" class="text-gray-400 hover:text-neon-blue transition duration-300">Home</a>
+                    <a href="#about" class="text-gray-400 hover:text-neon-blue transition duration-300">About</a>
+                    <a href="#portfolio" class="text-gray-400 hover:text-neon-blue transition duration-300">Portfolio</a>
+                    <a href="#services" class="text-gray-400 hover:text-neon-blue transition duration-300">Services</a>
+                    <a href="#contact" class="text-gray-400 hover:text-neon-blue transition duration-300">Contact</a>
+                    <a href="#" class="text-gray-400 hover:text-neon-blue transition duration-300">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.querySelector('.mobile-menu-button');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Portfolio filtering
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('bg-neon-blue', 'text-black'));
+                
+                // Add active class to clicked button
+                button.classList.add('bg-neon-blue', 'text-black');
+                
+                const filterValue = button.getAttribute('data-filter');
+                
+                portfolioItems.forEach(item => {
+                    if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                        item.classList.remove('hidden');
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                });
+            });
+        });
+        
+        // Testimonial slider
+        let currentTestimonial = 0;
+        const testimonials = document.querySelectorAll('.testimonial-item');
+        const dots = document.querySelectorAll('.testimonial-dot');
+        
+        function showTestimonial(index) {
+            testimonials.forEach(testimonial => testimonial.classList.add('hidden'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            testimonials[index].classList.remove('hidden');
+            dots[index].classList.add('active');
+            currentTestimonial = index;
+        }
+        
+        document.querySelector('.testimonial-next').addEventListener('click', () => {
+            let nextIndex = (currentTestimonial + 1) % testimonials.length;
+            showTestimonial(nextIndex);
+        });
+        
+        document.querySelector('.testimonial-prev').addEventListener('click', () => {
+            let prevIndex = (currentTestimonial - 1 + testimonials.length) % testimonials.length;
+            showTestimonial(prevIndex);
+        });
+        
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                showTestimonial(index);
+            });
+        });
+        
+        // Initialize first testimonial
+        showTestimonial(0);
+        
+        // Auto-rotate testimonials
+        setInterval(() => {
+            let nextIndex = (currentTestimonial + 1) % testimonials.length;
+            showTestimonial(nextIndex);
+        }, 5000);
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add scroll animation effects
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.scrollY;
+            
+            // Parallax effect for hero section
+            const hero = document.querySelector('#home');
+            if (hero) {
+                hero.style.backgroundPositionY = `${scrollPosition * 0.5}px`;
+            }
+            
+            // Animate elements when they come into view
+            const animatedElements = document.querySelectorAll('.card-3d, .neon-hover, .shine-effect');
+            
+            animatedElements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementPosition < windowHeight - 100) {
+                    element.classList.add('animate__animated', 'animate__fadeInUp');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
